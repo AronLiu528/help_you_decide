@@ -15,6 +15,8 @@ class WheelController extends GetxController {
 
   var isButtonEnabled = true.obs;
 
+  var isReturnPage = false;
+
   void spinWheel() {
     final int length = localData.localData[localDataIndex].option.length;
 
@@ -33,52 +35,61 @@ class WheelController extends GetxController {
           .animateToItem(scrollIndex,
               duration: const Duration(seconds: 3),
               curve: Curves.fastEaseInToSlowEaseOut)
-          .then((_) {
-        isButtonEnabled.value = true;
-        Future.delayed(const Duration(milliseconds: 500), () {
-          // if (Platform.isIOS) 偵測運行設備
-          Get.dialog(
-            CupertinoAlertDialog(
-              title: const Text(
-                '抽獎结果',
-                textAlign: TextAlign.center,
-              ),
-              content: Padding(
-                padding: const EdgeInsets.only(top: 20,bottom: 10),
-                child: Text(
-                  '${localData.localData[localDataIndex].option[randomIndex]}',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 30, color: Colors.redAccent),
-                ),
-              ),
-              actions: [
-                Center(
-                  child: CupertinoButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    child: const Text('OK'),
+          .then(
+        (_) {
+          isButtonEnabled.value = true;
+          Future.delayed(
+            const Duration(milliseconds: 500),
+            () {
+              // if (Platform.isIOS) 偵測運行設備
+              if (isReturnPage == false) {
+                //返回上頁不跳出dialog
+                Get.dialog(
+                  CupertinoAlertDialog(
+                    title: const Text(
+                      '抽獎结果',
+                      textAlign: TextAlign.center,
+                    ),
+                    content: Padding(
+                      padding: const EdgeInsets.only(top: 20, bottom: 10),
+                      child: Text(
+                        '${localData.localData[localDataIndex].option[randomIndex]}',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            fontSize: 30, color: Colors.redAccent),
+                      ),
+                    ),
+                    actions: [
+                      Center(
+                        child: CupertinoButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: const Text('OK'),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
+                );
+              }
+              // Get.defaultDialog(
+              //   title: '抽獎结果',
+              //   titleStyle: const TextStyle(fontSize: 20),
+              //   content: Text(
+              //     '${localData.localData[localDataIndex].option[randomIndex]}',
+              //     style: const TextStyle(fontSize: 35, color: Colors.redAccent),
+              //   ),
+              //   confirm: ElevatedButton(
+              //     child: const Text('OK'),
+              //     onPressed: () {
+              //       Get.back();
+              //     },
+              //   ),
+              // );
+            },
           );
-          // Get.defaultDialog(
-          //   title: '抽獎结果',
-          //   titleStyle: const TextStyle(fontSize: 20),
-          //   content: Text(
-          //     '${localData.localData[localDataIndex].option[randomIndex]}',
-          //     style: const TextStyle(fontSize: 35, color: Colors.redAccent),
-          //   ),
-          //   confirm: ElevatedButton(
-          //     child: const Text('OK'),
-          //     onPressed: () {
-          //       Get.back();
-          //     },
-          //   ),
-          // );
-        });
-      });
+        },
+      );
     }
   }
 
@@ -86,6 +97,7 @@ class WheelController extends GetxController {
   void onClose() {
     super.onClose();
     scrollController.dispose();
-    print('scrollController dispose');
+    isReturnPage = true;
+    print('wheelController dispose');
   }
 }
