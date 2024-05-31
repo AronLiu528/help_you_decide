@@ -54,39 +54,45 @@ class WheelPage extends StatelessWidget {
           children: [
             Expanded(
               child: Obx(
-                () => ListWheelScrollView.useDelegate(
-                  // onSelectedItemChanged: (index) {
-                  //   // print('滾輪停在 $index');
-                  //   print('Scroll rebuild');
-                  // },
-                  controller: wheelController.scrollController,
-                  overAndUnderCenterOpacity: 0.3,
-                  physics: const NeverScrollableScrollPhysics(), //禁用手動旋轉
-                  itemExtent: 50, // 高度
-                  diameterRatio: 1, // 滾筒直徑,預設2.0
-                  perspective: 0.008, // 3D 效果
-                  useMagnifier: true,
-                  magnification: 1.5,
-                  childDelegate: ListWheelChildLoopingListDelegate(
-                    children: [
-                      for (final option in localData.localData[index].option)
-                        Text(option,
-                            style: Theme.of(context).textTheme.displayLarge),
-                    ],
-                  ),
-                ),
+                () => localData.localData[index].item.isEmpty
+                    ? const Center(
+                        child: Text(
+                          'Bye Bye',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      )
+                    : ListWheelScrollView.useDelegate(
+                        // onSelectedItemChanged: (index) {
+                        //   // print('滾輪停在 $index');
+                        //   print('Scroll rebuild');
+                        // },
+                        controller: wheelController.scrollController,
+                        overAndUnderCenterOpacity: 0.3,
+                        physics: const NeverScrollableScrollPhysics(), //禁用手動旋轉
+                        itemExtent: 50, // 高度
+                        diameterRatio: 1, // 滾筒直徑,預設2.0
+                        perspective: 0.008, // 3D 效果
+                        useMagnifier: true,
+                        magnification: 1.5,
+                        childDelegate: ListWheelChildLoopingListDelegate(
+                          children: [
+                            for (final option
+                                in localData.localData[index].option)
+                              Text(option,
+                                  style:
+                                      Theme.of(context).textTheme.displayLarge),
+                          ],
+                        ),
+                      ),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: Obx(
-                () => ElevatedButton(
-                  onPressed: wheelController.isButtonEnabled.value
-                      ? wheelController.spinWheel
-                      : null,
-                  child: Text(
-                    wheelController.isButtonEnabled.value ? 'GO' : '抽獎中...',
-                  ),
+            Obx(
+              () => ElevatedButton(
+                onPressed: wheelController.isButtonEnabled.value
+                    ? wheelController.spinWheel
+                    : null,
+                child: Text(
+                  wheelController.isButtonEnabled.value ? 'GO' : '抽獎中...',
                 ),
               ),
             ),

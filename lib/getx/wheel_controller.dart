@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:help_you_decide/data/local_data.dart';
@@ -21,7 +22,7 @@ class WheelController extends GetxController {
       isButtonEnabled.value = false; // 轉動時禁用按钮
 
       final randomIndex = Random().nextInt(length);
-      final scrollIndex = randomIndex + length * 5;
+      final scrollIndex = randomIndex + length * 10;
       debugPrint('隨機數字 = $randomIndex');
 
       if (scrollController.selectedItem != 0) {
@@ -35,17 +36,47 @@ class WheelController extends GetxController {
           .then((_) {
         isButtonEnabled.value = true;
         Future.delayed(const Duration(milliseconds: 500), () {
-          Get.defaultDialog(
-            title: '抽獎结果',
-            middleText:
-                '${localData.localData[localDataIndex].option[randomIndex]}',
-            confirm: ElevatedButton(
-              child: const Text('OK'),
-              onPressed: () {
-                Get.back();
-              },
+          // if (Platform.isIOS) 偵測運行設備
+          Get.dialog(
+            CupertinoAlertDialog(
+              title: const Text(
+                '抽獎结果',
+                textAlign: TextAlign.center,
+              ),
+              content: Padding(
+                padding: const EdgeInsets.only(top: 20,bottom: 10),
+                child: Text(
+                  '${localData.localData[localDataIndex].option[randomIndex]}',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 30, color: Colors.redAccent),
+                ),
+              ),
+              actions: [
+                Center(
+                  child: CupertinoButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    child: const Text('OK'),
+                  ),
+                ),
+              ],
             ),
           );
+          // Get.defaultDialog(
+          //   title: '抽獎结果',
+          //   titleStyle: const TextStyle(fontSize: 20),
+          //   content: Text(
+          //     '${localData.localData[localDataIndex].option[randomIndex]}',
+          //     style: const TextStyle(fontSize: 35, color: Colors.redAccent),
+          //   ),
+          //   confirm: ElevatedButton(
+          //     child: const Text('OK'),
+          //     onPressed: () {
+          //       Get.back();
+          //     },
+          //   ),
+          // );
         });
       });
     }

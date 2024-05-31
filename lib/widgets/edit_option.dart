@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:help_you_decide/data/local_data.dart';
 import 'package:help_you_decide/getx/home_controller.dart';
+import 'package:help_you_decide/pages/home_page.dart';
 // import 'package:help_you_decide/pages/home_page.dart';
 
 class EditOption extends StatelessWidget {
@@ -31,16 +33,31 @@ class EditOption extends StatelessWidget {
             localDataIndex, newItemController.text.trim(), editedList);
         Get.back();
       } else {
-        Get.defaultDialog(
-          title: '請協助確認',
-          content: const Text(
-            '1.項目是否已正確輸入？\n2.選項是否已正確輸入？\n3.選項是否有(含)超過兩項？',
-          ),
-          confirm: ElevatedButton(
-            child: const Text('OK'),
-            onPressed: () {
-              Get.back();
-            },
+        Get.dialog(
+          CupertinoAlertDialog(
+            title: const Text('請協助確認 :'),
+            content: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 40),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 20),
+                  Text('1.項目是否已正確輸入？'),
+                  SizedBox(height: 10),
+                  Text('2.選項是否已正確輸入？'),
+                  SizedBox(height: 10),
+                  Text('3.選項是否(含)超過兩項？'),
+                ],
+              ),
+            ),
+            actions: [
+              CupertinoButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Get.back();
+                },
+              ),
+            ],
           ),
         );
       }

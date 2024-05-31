@@ -38,23 +38,12 @@ var theme = ThemeData(
   ),
   textTheme: TextTheme(
     // headlineLarge: TextStyle(fontSize: 30.0, color: Colors.red),
-
     displayLarge:
         GoogleFonts.lato(fontSize: 28.0, color: Colors.black), //for wheel
     // bodyMedium: TextStyle(fontSize: 15.0, color: Colors.black), //wheel
 
     //  bodySmall: TextStyle(fontSize: 30.0, color: Colors.black),
   ),
-
-  // textTheme: ThemeData().textTheme.copyWith(
-  //       titleLarge: GoogleFonts.lato(
-  //         textStyle: const TextStyle(
-  //           fontWeight: FontWeight.w900,
-  //           color: Colors.yellowAccent,
-  //           fontSize: 18,
-  //         ),
-  //       ),
-  //     ),
 );
 
 class MyApp extends StatelessWidget {

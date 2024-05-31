@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
     print(localData.localData);
     return Scaffold(
       appBar: AppBar(
-        title: Text('幫你做出選擇'),
+        title: const Text('抽獎小幫手'),
         actions: [
           IconButton(
             onPressed: _showAddDecisionSheet,
@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               // colors: [Colors.blue, Colors.purple],
-              colors: [Colors.pinkAccent, Colors.red],
+              colors: [Colors.pinkAccent, Colors.redAccent],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -50,23 +50,26 @@ class HomePage extends StatelessWidget {
         ),
       ),
       body: Container(
-        // decoration: const BoxDecoration(
-        //   gradient: LinearGradient(
-        //     colors: [
-        //       Color.fromARGB(250, 156, 229, 227),
-        //       Color.fromARGB(100, 50, 229, 227),
-        //     ],
-        //     begin: Alignment.topRight,
-        //     end: Alignment.bottomLeft,
-        //   ),
-        // ),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(250, 156, 229, 227),
+              Color.fromARGB(100, 50, 229, 227),
+            ],
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+          ),
+        ),
         child: Column(
           children: [
             Expanded(
               child: Obx(
                 () => localData.localData.isEmpty
                     ? const Center(
-                        child: Text('Oh oh...加點項目吧!!'),
+                        child: Text(
+                          '目前沒有項目\n \n新增個項目吧!!',
+                          style: TextStyle(fontSize: 20),
+                        ),
                       )
                     : GridView.builder(
                         padding: const EdgeInsets.all(15),
@@ -87,13 +90,17 @@ class HomePage extends StatelessWidget {
                           },
                           child: Text(
                             localData.localData[index].item,
-                            maxLines: 2,
+                            maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(color: Colors.brown),
                           ),
                         ),
                       ),
               ),
+            ),
+            IconButton(
+              onPressed: _showAddDecisionSheet,
+              icon: Icon(Icons.add_circle_outline,size: 30,),
             ),
             ElevatedButton(
               onPressed: () {
