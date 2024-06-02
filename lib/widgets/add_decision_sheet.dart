@@ -43,54 +43,77 @@ class AddDecisionSheet extends StatelessWidget {
           TextField(
             controller: _itemController,
             textAlign: TextAlign.center,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: '項目',
               hintText: '請輸入項目',
               floatingLabelAlignment: FloatingLabelAlignment.center,
-              contentPadding: const EdgeInsets.all(20),
-              border: const OutlineInputBorder(),
-              fillColor: Colors.lightBlue[50],
+              // contentPadding: EdgeInsets.all(20),
+              border: OutlineInputBorder(),
             ),
           ),
           const SizedBox(height: 10),
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: _optionController,
-                  textAlign: TextAlign.center,
-                  decoration: const InputDecoration(
-                    labelText: '選項',
-                    hintText: '請輸入選項',
-                    floatingLabelAlignment: FloatingLabelAlignment.center,
-                  ),
-                ),
+          ListTile(
+            leading: const Text('選項:'),
+            title: TextField(
+              controller: _optionController,
+              textAlign: TextAlign.center,
+              decoration: const InputDecoration(
+                hintText: '請輸入選項',
+                floatingLabelAlignment: FloatingLabelAlignment.center,
               ),
-              IconButton(
-                onPressed: _addOption,
-                icon: const Icon(Icons.add_circle),
-              ),
-            ],
+            ),
+            trailing: IconButton(
+              onPressed: _addOption,
+              icon: const Icon(Icons.add_circle),
+            ),
           ),
-          const SizedBox(height: 20),
+
+          // Row(
+          //   children: [
+          //     Expanded(
+          //       child: TextField(
+          //         controller: _optionController,
+          //         textAlign: TextAlign.center,
+          //         decoration: const InputDecoration(
+          //           labelText: '選項',
+          //           hintText: '請輸入選項',
+          //           floatingLabelAlignment: FloatingLabelAlignment.center,
+          //         ),
+          //       ),
+          //     ),
+          //     IconButton(
+          //       onPressed: _addOption,
+          //       icon: const Icon(Icons.add_circle),
+          //     ),
+          //   ],
+          // ),
+          const SizedBox(height: 10),
+          const Divider(color: Colors.grey),
+          const SizedBox(height: 10),
           Expanded(
             child: Obx(
-              () => ListView.builder(
-                itemCount: optionsList.length,
-                itemBuilder: (ctx, index) => ListTile(
-                  leading: Text('選項 ${index + 1}.'),
-                  title: Text(
-                    optionsList[index],
-                    textAlign: TextAlign.center,
-                  ),
-                  trailing: IconButton(
-                    onPressed: () {
-                      optionsList.removeAt(index);
-                    },
-                    icon: const Icon(Icons.remove_circle),
-                  ),
-                ),
-              ),
+              () => optionsList.isEmpty
+                  ? const Center(
+                      child: Text(
+                        '加點項目吧！',
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: optionsList.length,
+                      itemBuilder: (ctx, index) => ListTile(
+                        leading: Text('選項 ${index + 1}.'),
+                        title: Text(
+                          optionsList[index],
+                          textAlign: TextAlign.center,
+                        ),
+                        trailing: IconButton(
+                          onPressed: () {
+                            optionsList.removeAt(index);
+                          },
+                          icon: const Icon(Icons.remove_circle),
+                        ),
+                      ),
+                    ),
             ),
           ),
         ],

@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:help_you_decide/data/local_data.dart';
 import 'package:help_you_decide/getx/home_controller.dart';
-import 'package:help_you_decide/pages/home_page.dart';
-// import 'package:help_you_decide/pages/home_page.dart';
 
 class EditOption extends StatelessWidget {
   EditOption({super.key});
@@ -64,8 +62,8 @@ class EditOption extends StatelessWidget {
     }
 
     return Container(
-      margin: const EdgeInsets.only(top: 60, left: 30, right: 30, bottom: 30),
-      padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+      margin: const EdgeInsets.only(top: 60, left: 30, right: 30, bottom: 50),
+      padding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Colors.white,
@@ -75,17 +73,12 @@ class EditOption extends StatelessWidget {
           children: [
             Row(
               children: [
-                TextButton(
-                  onPressed: () {
-                    // print('取消編輯前List = $editedList');
-                    // editedList.assignAll(editOptionPageController.originalData[externalIndex].option);
-                    // print('編輯後List = $editedList');
-                    Get.back();
-                  },
+                CupertinoButton(
+                  onPressed: Get.back,
                   child: const Text('取消'),
                 ),
                 const Spacer(),
-                TextButton(
+                CupertinoButton(
                   onPressed: saveOptionList,
                   child: const Text('儲存'),
                 ),
@@ -100,18 +93,12 @@ class EditOption extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
               textAlign: TextAlign.center,
-              // onSubmitted: (newValue) {
-              //   editedList.value.item = newValue;
-              // },
             ),
             ListTile(
               leading: const Text('新增:'),
               title: TextField(
                 controller: newOptionController,
                 textAlign: TextAlign.center,
-                // onSubmitted: (newValue) {
-                //   editedList.value.item = newValue;
-                // },
               ),
               trailing: IconButton(
                 onPressed: () {
@@ -120,29 +107,37 @@ class EditOption extends StatelessWidget {
                     newOptionController.clear();
                   }
                 },
-                icon: const Icon(Icons.add_circle),
+                icon: const Icon(
+                  Icons.add_circle,
+                ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
+            const Divider(color: Colors.grey),
+            const SizedBox(height: 10),
             Expanded(
-              child: Obx(() => ListView.builder(
-                    itemCount: editedList.length,
-                    itemBuilder: ((context, index) {
-                      return ListTile(
-                        leading: Text('選項 ${index + 1}.'),
-                        title: Text(
-                          editedList[index],
-                          textAlign: TextAlign.center,
-                        ),
-                        trailing: IconButton(
-                          onPressed: () {
-                            editedList.removeAt(index);
-                          },
-                          icon: const Icon(Icons.remove_circle),
-                        ),
-                      );
-                    }),
-                  )),
+              child: Obx(() => editedList.isEmpty
+                  ? const Center(
+                      child: Text('沒有內容'),
+                    )
+                  : ListView.builder(
+                      itemCount: editedList.length,
+                      itemBuilder: ((context, index) {
+                        return ListTile(
+                          leading: Text('選項 ${index + 1}.'),
+                          title: Text(
+                            editedList[index],
+                            textAlign: TextAlign.center,
+                          ),
+                          trailing: IconButton(
+                            onPressed: () {
+                              editedList.removeAt(index);
+                            },
+                            icon: const Icon(Icons.remove_circle),
+                          ),
+                        );
+                      }),
+                    )),
             ),
           ],
         ),

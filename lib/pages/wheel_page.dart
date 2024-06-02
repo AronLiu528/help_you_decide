@@ -62,10 +62,6 @@ class WheelPage extends StatelessWidget {
                         ),
                       )
                     : ListWheelScrollView.useDelegate(
-                        // onSelectedItemChanged: (index) {
-                        //   // print('滾輪停在 $index');
-                        //   print('Scroll rebuild');
-                        // },
                         controller: wheelController.scrollController,
                         overAndUnderCenterOpacity: 0.3,
                         physics: const NeverScrollableScrollPhysics(), //禁用手動旋轉

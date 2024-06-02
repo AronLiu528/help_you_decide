@@ -39,7 +39,7 @@ class WheelController extends GetxController {
         (_) {
           isButtonEnabled.value = true;
           Future.delayed(
-            const Duration(milliseconds: 500),
+            const Duration(milliseconds: 100),
             () {
               // if (Platform.isIOS) 偵測運行設備
               if (isReturnPage == false) {
