@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:help_you_decide/data/local_data.dart';
 import 'package:help_you_decide/getx/home_controller.dart';
+import 'package:help_you_decide/pages/home_page.dart';
 
 class EditOption extends StatelessWidget {
   EditOption({super.key});
@@ -63,7 +64,7 @@ class EditOption extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.only(top: 60, left: 30, right: 30, bottom: 50),
-      padding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
+      padding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Colors.white,
@@ -107,9 +108,7 @@ class EditOption extends StatelessWidget {
                     newOptionController.clear();
                   }
                 },
-                icon: const Icon(
-                  Icons.add_circle,
-                ),
+                icon: const Icon(Icons.add_circle),
               ),
             ),
             const SizedBox(height: 10),
@@ -118,7 +117,7 @@ class EditOption extends StatelessWidget {
             Expanded(
               child: Obx(() => editedList.isEmpty
                   ? const Center(
-                      child: Text('沒有內容'),
+                      child: Text('沒有選項'),
                     )
                   : ListView.builder(
                       itemCount: editedList.length,
@@ -138,6 +137,17 @@ class EditOption extends StatelessWidget {
                         );
                       }),
                     )),
+            ),
+            Container(
+              width: double.infinity,
+              color: Colors.redAccent,
+              child: CupertinoButton(
+                onPressed: () {
+                  Get.offAll(() => HomePage());
+                  editOptionPageController.removeLocalDataIndex(localDataIndex);
+                },
+                child: const Text('刪除此項目',style: TextStyle(color: Colors.white),),
+              ),
             ),
           ],
         ),

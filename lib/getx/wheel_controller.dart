@@ -56,7 +56,7 @@ class WheelController extends GetxController {
                         '${localData.localData[localDataIndex].option[randomIndex]}',
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                            fontSize: 30, color: Colors.redAccent),
+                            fontSize: 30, color: Colors.redAccent,fontWeight: FontWeight.bold),
                       ),
                     ),
                     actions: [

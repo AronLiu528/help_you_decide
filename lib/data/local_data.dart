@@ -66,8 +66,8 @@ class LocalData {
     saveToLocal();
   } //轉輪頁修改項目/選項 
 
-  void forTestRemoveOriginalDataItem(int index) {
+  void removeLocalDataIndex(int index) {
     localData.removeAt(index);
-    saveToLocal();
+    // saveToLocal();
   } //only for test
 }

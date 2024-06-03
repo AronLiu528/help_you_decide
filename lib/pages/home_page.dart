@@ -98,16 +98,6 @@ class HomePage extends StatelessWidget {
                       ),
               ),
             ),
-            IconButton(
-              onPressed: _showAddDecisionSheet,
-              icon: Icon(Icons.add_circle_outline,size: 30,),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                homeController.forTestRemoveLocalDataItem(3);
-              },
-              child: const Text('僅供測試刪除項目用'),
-            ), //only for test
             const SizedBox(
               height: 100,
             )

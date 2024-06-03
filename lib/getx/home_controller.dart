@@ -30,8 +30,8 @@ class HomeController extends GetxController {
     localData.updateLocalData(index, item, options);
   }
 
-  void forTestRemoveLocalDataItem(int index) {
-    localData.forTestRemoveOriginalDataItem(index);
+  void removeLocalDataIndex(int index) {
+    localData.removeLocalDataIndex(index);
   } //only for test
 
 }

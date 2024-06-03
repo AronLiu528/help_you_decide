@@ -9,16 +9,18 @@ class WheelPage extends StatelessWidget {
 
   final LocalData localData = Get.find<LocalData>();
 
-  final int index = Get.arguments;
+  final int? index = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
     final WheelController wheelController =
-        Get.put(WheelController(localDataIndex: index));
+        Get.put(WheelController(localDataIndex: index!));
 
     return Scaffold(
       appBar: AppBar(
-        title: Obx(() => Text('抽獎項目：${localData.localData[index].item}')),
+        title: Obx(() => index! >= localData.localData.length
+            ? const Text('已沒有內容')
+            : Text('抽獎項目：${localData.localData[index!].item}')),
         actions: [
           IconButton(
             onPressed: () {
@@ -54,12 +56,9 @@ class WheelPage extends StatelessWidget {
           children: [
             Expanded(
               child: Obx(
-                () => localData.localData[index].item.isEmpty
+                () => index! >= localData.localData.length
                     ? const Center(
-                        child: Text(
-                          'Bye Bye',
-                          style: TextStyle(fontSize: 20),
-                        ),
+                        child: Text('已沒有內容'),
                       )
                     : ListWheelScrollView.useDelegate(
                         controller: wheelController.scrollController,
@@ -73,7 +72,7 @@ class WheelPage extends StatelessWidget {
                         childDelegate: ListWheelChildLoopingListDelegate(
                           children: [
                             for (final option
-                                in localData.localData[index].option)
+                                in localData.localData[index!].option)
                               Text(option,
                                   style:
                                       Theme.of(context).textTheme.displayLarge),
