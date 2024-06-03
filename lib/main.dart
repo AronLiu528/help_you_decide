@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:help_you_decide/data/local_data.dart';
 import 'package:help_you_decide/pages/home_page.dart';
+import 'package:help_you_decide/widgets/unique_random.dart';
 
 void main() {
   runApp(const MyApp());
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(LocalData());
+    Get.put(UniqueRandom());
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme,

@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:help_you_decide/data/local_data.dart';
 import 'dart:math';
 
+import 'package:help_you_decide/widgets/unique_random.dart';
+
 class WheelController extends GetxController {
   WheelController({required this.localDataIndex});
 
@@ -17,13 +19,16 @@ class WheelController extends GetxController {
 
   var isReturnPage = false;
 
+  final uniqueRandom = Get.find<UniqueRandom>();
+
   void spinWheel() {
     final int length = localData.localData[localDataIndex].option.length;
 
     if (isButtonEnabled.isTrue) {
       isButtonEnabled.value = false; // 轉動時禁用按钮
 
-      final randomIndex = Random().nextInt(length);
+      // final randomIndex = Random().nextInt(length);
+      final randomIndex = uniqueRandom.nextInt(length);
       final scrollIndex = randomIndex + length * 10;
       debugPrint('隨機數字 = $randomIndex');
 
@@ -43,7 +48,7 @@ class WheelController extends GetxController {
             () {
               // if (Platform.isIOS) 偵測運行設備
               if (isReturnPage == false) {
-                //返回上頁不跳出dialog
+                //若轉盤尚未轉完返回上頁時不跳出dialog
                 Get.dialog(
                   CupertinoAlertDialog(
                     title: const Text(
@@ -56,7 +61,9 @@ class WheelController extends GetxController {
                         '${localData.localData[localDataIndex].option[randomIndex]}',
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                            fontSize: 30, color: Colors.redAccent,fontWeight: FontWeight.bold),
+                            fontSize: 30,
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                     actions: [
@@ -72,20 +79,6 @@ class WheelController extends GetxController {
                   ),
                 );
               }
-              // Get.defaultDialog(
-              //   title: '抽獎结果',
-              //   titleStyle: const TextStyle(fontSize: 20),
-              //   content: Text(
-              //     '${localData.localData[localDataIndex].option[randomIndex]}',
-              //     style: const TextStyle(fontSize: 35, color: Colors.redAccent),
-              //   ),
-              //   confirm: ElevatedButton(
-              //     child: const Text('OK'),
-              //     onPressed: () {
-              //       Get.back();
-              //     },
-              //   ),
-              // );
             },
           );
         },
@@ -101,3 +94,24 @@ class WheelController extends GetxController {
     print('wheelController dispose');
   }
 }
+
+// //隨機且不與上次結果重複class
+// class UniqueRandom {
+//   final Random _random = Random();
+//   int? _previousNumber;
+//   bool _isSwitchOn = true;
+
+//   void switchAvoidRepeats() {
+//     _isSwitchOn = !_isSwitchOn;
+//   }
+
+//   int nextInt(int length) {
+//     int newNumber;
+//     do {
+//       newNumber = _random.nextInt(length);
+//     } while (_isSwitchOn && newNumber == _previousNumber);
+
+//     _previousNumber = newNumber;
+//     return newNumber;
+//   }
+// }

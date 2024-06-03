@@ -1,20 +1,26 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:help_you_decide/data/local_data.dart';
 import 'package:help_you_decide/getx/wheel_controller.dart';
 import 'package:help_you_decide/widgets/edit_option.dart';
+import 'package:help_you_decide/widgets/unique_random.dart';
 
 class WheelPage extends StatelessWidget {
   WheelPage({super.key});
 
-  final LocalData localData = Get.find<LocalData>();
+  final localData = Get.find<LocalData>();
 
   final int? index = Get.arguments;
+
+  final uniqueRandom = Get.find<UniqueRandom>();
 
   @override
   Widget build(BuildContext context) {
     final WheelController wheelController =
         Get.put(WheelController(localDataIndex: index!));
+
+    // final UniqueRandom uniqueRandom = UniqueRandom();
 
     return Scaffold(
       appBar: AppBar(
@@ -42,16 +48,16 @@ class WheelPage extends StatelessWidget {
       ),
       body: Container(
         padding: const EdgeInsets.all(15),
-        // decoration: const BoxDecoration(
-        //   gradient: LinearGradient(
-        //     colors: [
-        //       Color.fromARGB(250, 156, 229, 227),
-        //       Color.fromARGB(100, 50, 229, 227),
-        //     ],
-        //     begin: Alignment.topRight,
-        //     end: Alignment.bottomLeft,
-        //   ),
-        // ),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(250, 156, 229, 227),
+              Color.fromARGB(100, 50, 229, 227),
+            ],
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+          ),
+        ),
         child: Column(
           children: [
             Expanded(
@@ -91,7 +97,25 @@ class WheelPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 200),
+            const SizedBox(height: 50),
+            Obx(
+              () => Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  uniqueRandom.isSwitchOn.value
+                      ? const Text('不與前次抽獎結果重複')
+                      : const Text('可與前次抽獎結果重複'),
+                      const SizedBox(width: 5),
+                  Switch.adaptive(
+                    value: uniqueRandom.isSwitchOn.value,
+                    onChanged: (value) {
+                      uniqueRandom.switchAvoidRepeats();
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 100),
           ],
         ),
       ),

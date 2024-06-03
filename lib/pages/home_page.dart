@@ -25,7 +25,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(localData.localData);
     return Scaffold(
       appBar: AppBar(
         title: const Text('抽獎小幫手'),

@@ -112,6 +112,7 @@ class EditOption extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
+            SwitchListTile(value: true, onChanged: (value){}),
             const Divider(color: Colors.grey),
             const SizedBox(height: 10),
             Expanded(
@@ -138,15 +139,30 @@ class EditOption extends StatelessWidget {
                       }),
                     )),
             ),
+            const Divider(color: Colors.grey),
+            const SizedBox(height: 10),
             Container(
               width: double.infinity,
-              color: Colors.redAccent,
+              // color: Colors.redAccent,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                // color: Colors.red,
+                gradient: const LinearGradient(
+                  colors: [Colors.pinkAccent, Colors.redAccent],
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                ),
+              ),
+
               child: CupertinoButton(
                 onPressed: () {
                   Get.offAll(() => HomePage());
                   editOptionPageController.removeLocalDataIndex(localDataIndex);
                 },
-                child: const Text('刪除此項目',style: TextStyle(color: Colors.white),),
+                child: const Text(
+                  '刪除此項目',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
