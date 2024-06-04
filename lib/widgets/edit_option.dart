@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:help_you_decide/data/local_data.dart';
 import 'package:help_you_decide/getx/home_controller.dart';
 import 'package:help_you_decide/pages/home_page.dart';
+import 'package:help_you_decide/widgets/unique_random.dart';
 
 class EditOption extends StatelessWidget {
   EditOption({super.key});
@@ -13,6 +14,8 @@ class EditOption extends StatelessWidget {
   final LocalData localData = Get.find<LocalData>();
 
   final int localDataIndex = Get.arguments; //localData的索引
+
+  final uniqueRandom = Get.find<UniqueRandom>();
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +66,7 @@ class EditOption extends StatelessWidget {
     }
 
     return Container(
-      margin: const EdgeInsets.only(top: 60, left: 30, right: 30, bottom: 50),
+      margin: const EdgeInsets.only(top: 40, left: 20, right: 20, bottom: 40),
       padding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -112,7 +115,23 @@ class EditOption extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            SwitchListTile(value: true, onChanged: (value){}),
+            // Obx(
+            //   () => Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       uniqueRandom.isSwitchOn.value
+            //           ? const Text('不與前次抽獎結果相同')
+            //           : const Text('可與前次抽獎結果相同'),
+            //       const SizedBox(width: 20),
+            //       Switch.adaptive(
+            //         value: uniqueRandom.isSwitchOn.value,
+            //         onChanged: (value) {
+            //           uniqueRandom.switchAvoidRepeats();
+            //         },
+            //       ),
+            //     ],
+            //   ),
+            // ),
             const Divider(color: Colors.grey),
             const SizedBox(height: 10),
             Expanded(
@@ -148,16 +167,37 @@ class EditOption extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 // color: Colors.red,
                 gradient: const LinearGradient(
-                  colors: [Colors.pinkAccent, Colors.redAccent],
+                  colors: [Colors.red, Colors.red],
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                 ),
               ),
-
               child: CupertinoButton(
                 onPressed: () {
-                  Get.offAll(() => HomePage());
-                  editOptionPageController.removeLocalDataIndex(localDataIndex);
+                  Get.dialog(
+                    CupertinoAlertDialog(
+                      content: const Text(
+                        '是否確定刪除本項目',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      actions: [
+                        CupertinoButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: const Text('取消'),
+                        ),
+                        CupertinoButton(
+                          onPressed: () {
+                            Get.offAll(() => HomePage());
+                            editOptionPageController
+                                .removeLocalDataIndex(localDataIndex);
+                          },
+                          child: const Text('確定'),
+                        ),
+                      ],
+                    ),
+                  );
                 },
                 child: const Text(
                   '刪除此項目',

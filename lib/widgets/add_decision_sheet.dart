@@ -20,7 +20,7 @@ class AddDecisionSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     print('options = $optionsList');
     return Container(
-      height: Get.height * 0.75,
+      height: Get.height * 0.8,
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [

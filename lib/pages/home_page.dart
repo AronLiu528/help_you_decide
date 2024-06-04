@@ -75,7 +75,7 @@ class HomePage extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(), //禁用滑動
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                          mainAxisExtent: 60.0,
+                          mainAxisExtent: 70.0,
                           // childAspectRatio: 1.5,//長寬比
                           crossAxisCount: 3,
                           crossAxisSpacing: 20,
@@ -96,10 +96,7 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
               ),
-            ),
-            const SizedBox(
-              height: 100,
-            )
+            ),            
           ],
         ),
       ),

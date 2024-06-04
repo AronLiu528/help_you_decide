@@ -103,9 +103,9 @@ class WheelPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   uniqueRandom.isSwitchOn.value
-                      ? const Text('不與前次抽獎結果重複')
-                      : const Text('可與前次抽獎結果重複'),
-                      const SizedBox(width: 5),
+                      ? const Text('抽獎結果可重複') //on
+                      : const Text('抽獎結果不重複'), //off
+                  const SizedBox(width: 10),
                   Switch.adaptive(
                     value: uniqueRandom.isSwitchOn.value,
                     onChanged: (value) {

@@ -13,13 +13,13 @@ class WheelController extends GetxController {
 
   final LocalData localData = Get.find<LocalData>();
 
+  final uniqueRandom = Get.find<UniqueRandom>();
+
   final int localDataIndex; //localData的索引
 
   var isButtonEnabled = true.obs;
 
   var isReturnPage = false;
-
-  final uniqueRandom = Get.find<UniqueRandom>();
 
   void spinWheel() {
     final int length = localData.localData[localDataIndex].option.length;

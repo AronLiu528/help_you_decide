@@ -9,10 +9,12 @@ void main() {
   runApp(const MyApp());
 }
 
-var myColorScheme = ColorScheme.fromSeed(seedColor: Colors.brown);
+var myColorScheme = ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 38, 28, 21));
 
 var theme = ThemeData(
   colorScheme: myColorScheme,
+  // scaffoldBackgroundColor: Color.fromARGB(100, 50, 229, 227),
+            
   scaffoldBackgroundColor: const Color.fromARGB(255, 156, 229, 227),
   appBarTheme: AppBarTheme(
     // backgroundColor: Colors.redAccent, //在AppBar()設置
@@ -24,7 +26,7 @@ var theme = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       // backgroundColor: myColorScheme.onPrimary,
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 255, 251, 255),
       disabledBackgroundColor: myColorScheme.onSecondary,
       // side: const BorderSide(
       //   color: Colors.orangeAccent,
@@ -57,6 +59,7 @@ class MyApp extends StatelessWidget {
     Get.put(UniqueRandom());
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      
       theme: theme,
       home: HomePage(),
     );
