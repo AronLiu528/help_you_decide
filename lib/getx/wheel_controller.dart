@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:help_you_decide/data/local_data.dart';
-import 'dart:math';
-
 import 'package:help_you_decide/widgets/unique_random.dart';
 
 class WheelController extends GetxController {
@@ -26,8 +24,6 @@ class WheelController extends GetxController {
 
     if (isButtonEnabled.isTrue) {
       isButtonEnabled.value = false; // 轉動時禁用按钮
-
-      // final randomIndex = Random().nextInt(length);
       final randomIndex = uniqueRandom.nextInt(length);
       final scrollIndex = randomIndex + length * 10;
       debugPrint('隨機數字 = $randomIndex');
@@ -46,7 +42,7 @@ class WheelController extends GetxController {
           Future.delayed(
             const Duration(milliseconds: 100),
             () {
-              // if (Platform.isIOS) 偵測運行設備
+              // if (Platform.isIOS) 偵測運行設備，考慮增設
               if (isReturnPage == false) {
                 //若轉盤尚未轉完返回上頁時不跳出dialog
                 Get.dialog(
@@ -94,24 +90,3 @@ class WheelController extends GetxController {
     print('wheelController dispose');
   }
 }
-
-// //隨機且不與上次結果重複class
-// class UniqueRandom {
-//   final Random _random = Random();
-//   int? _previousNumber;
-//   bool _isSwitchOn = true;
-
-//   void switchAvoidRepeats() {
-//     _isSwitchOn = !_isSwitchOn;
-//   }
-
-//   int nextInt(int length) {
-//     int newNumber;
-//     do {
-//       newNumber = _random.nextInt(length);
-//     } while (_isSwitchOn && newNumber == _previousNumber);
-
-//     _previousNumber = newNumber;
-//     return newNumber;
-//   }
-// }

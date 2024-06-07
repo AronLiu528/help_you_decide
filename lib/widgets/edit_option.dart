@@ -88,7 +88,7 @@ class EditOption extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             TextField(
               controller: newItemController,
               decoration: const InputDecoration(
@@ -115,23 +115,6 @@ class EditOption extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            // Obx(
-            //   () => Row(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: [
-            //       uniqueRandom.isSwitchOn.value
-            //           ? const Text('不與前次抽獎結果相同')
-            //           : const Text('可與前次抽獎結果相同'),
-            //       const SizedBox(width: 20),
-            //       Switch.adaptive(
-            //         value: uniqueRandom.isSwitchOn.value,
-            //         onChanged: (value) {
-            //           uniqueRandom.switchAvoidRepeats();
-            //         },
-            //       ),
-            //     ],
-            //   ),
-            // ),
             const Divider(color: Colors.grey),
             const SizedBox(height: 10),
             Expanded(
@@ -162,10 +145,8 @@ class EditOption extends StatelessWidget {
             const SizedBox(height: 10),
             Container(
               width: double.infinity,
-              // color: Colors.redAccent,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                // color: Colors.red,
                 gradient: const LinearGradient(
                   colors: [Colors.red, Colors.red],
                   begin: Alignment.topRight,

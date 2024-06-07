@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:help_you_decide/data/local_data.dart';
+import 'package:help_you_decide/getx/home_controller.dart';
 import 'package:help_you_decide/pages/home_page.dart';
 import 'package:help_you_decide/widgets/unique_random.dart';
 
@@ -9,24 +10,19 @@ void main() {
   runApp(const MyApp());
 }
 
-var myColorScheme = ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 38, 28, 21));
+var myColorScheme = ColorScheme.fromSeed(seedColor: Colors.brown);
 
 var theme = ThemeData(
   colorScheme: myColorScheme,
-  // scaffoldBackgroundColor: Color.fromARGB(100, 50, 229, 227),
-            
   scaffoldBackgroundColor: const Color.fromARGB(255, 156, 229, 227),
   appBarTheme: AppBarTheme(
     // backgroundColor: Colors.redAccent, //在AppBar()設置
     foregroundColor: myColorScheme.onPrimary,
-    titleTextStyle: GoogleFonts.lato(
-      textStyle: const TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
-    ),
+    titleTextStyle: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      // backgroundColor: myColorScheme.onPrimary,
-      backgroundColor: Color.fromARGB(255, 255, 251, 255),
+      backgroundColor: myColorScheme.onPrimary,
       disabledBackgroundColor: myColorScheme.onSecondary,
       // side: const BorderSide(
       //   color: Colors.orangeAccent,
@@ -57,9 +53,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(LocalData());
     Get.put(UniqueRandom());
+    Get.put(HomeController());
+
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      
       theme: theme,
       home: HomePage(),
     );

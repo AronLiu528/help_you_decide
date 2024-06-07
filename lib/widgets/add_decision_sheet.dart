@@ -18,105 +18,86 @@ class AddDecisionSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('options = $optionsList');
-    return Container(
-      height: Get.height * 0.8,
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              CupertinoButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: const Text('取消'),
-              ),
-              const Spacer(),
-              CupertinoButton(
-                onPressed: _submitData,
-                child: const Text('儲存'),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          TextField(
-            controller: _itemController,
-            textAlign: TextAlign.center,
-            decoration: const InputDecoration(
-              labelText: '項目',
-              hintText: '請輸入項目',
-              floatingLabelAlignment: FloatingLabelAlignment.center,
-              // contentPadding: EdgeInsets.all(20),
-              border: OutlineInputBorder(),
+    return SingleChildScrollView(
+      child: Container(
+        height: Get.height * 0.8,
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                CupertinoButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: const Text('取消'),
+                ),
+                const Spacer(),
+                CupertinoButton(
+                  onPressed: _submitData,
+                  child: const Text('儲存'),
+                ),
+              ],
             ),
-          ),
-          const SizedBox(height: 10),
-          ListTile(
-            leading: const Text('選項:'),
-            title: TextField(
-              controller: _optionController,
+            const SizedBox(height: 10),
+            TextField(
+              controller: _itemController,
               textAlign: TextAlign.center,
               decoration: const InputDecoration(
-                hintText: '請輸入選項',
+                labelText: '項目',
+                hintText: '請輸入項目',
                 floatingLabelAlignment: FloatingLabelAlignment.center,
+                contentPadding: EdgeInsets.all(18),
+                border: OutlineInputBorder(),
               ),
             ),
-            trailing: IconButton(
-              onPressed: _addOption,
-              icon: const Icon(Icons.add_circle),
+            const SizedBox(height: 10),
+            ListTile(
+              leading: const Text('選項:'),
+              title: TextField(
+                controller: _optionController,
+                textAlign: TextAlign.center,
+                decoration: const InputDecoration(
+                  hintText: '請輸入選項',
+                  floatingLabelAlignment: FloatingLabelAlignment.center,
+                ),
+              ),
+              trailing: IconButton(
+                onPressed: _addOption,
+                icon: const Icon(Icons.add_circle),
+              ),
             ),
-          ),
-
-          // Row(
-          //   children: [
-          //     Expanded(
-          //       child: TextField(
-          //         controller: _optionController,
-          //         textAlign: TextAlign.center,
-          //         decoration: const InputDecoration(
-          //           labelText: '選項',
-          //           hintText: '請輸入選項',
-          //           floatingLabelAlignment: FloatingLabelAlignment.center,
-          //         ),
-          //       ),
-          //     ),
-          //     IconButton(
-          //       onPressed: _addOption,
-          //       icon: const Icon(Icons.add_circle),
-          //     ),
-          //   ],
-          // ),
-          const SizedBox(height: 10),
-          const Divider(color: Colors.grey),
-          const SizedBox(height: 10),
-          Expanded(
-            child: Obx(
-              () => optionsList.isEmpty
-                  ? const Center(
-                      child: Text(
-                        '加點項目吧！',
-                      ),
-                    )
-                  : ListView.builder(
-                      itemCount: optionsList.length,
-                      itemBuilder: (ctx, index) => ListTile(
-                        leading: Text('選項 ${index + 1}.'),
-                        title: Text(
-                          optionsList[index],
-                          textAlign: TextAlign.center,
+            const SizedBox(height: 10),
+            const Divider(color: Colors.grey),
+            const SizedBox(height: 10),
+            Expanded(
+              child: Obx(
+                () => optionsList.isEmpty
+                    ? const Center(
+                        child: Text(
+                          '尚無內容',
                         ),
-                        trailing: IconButton(
-                          onPressed: () {
-                            optionsList.removeAt(index);
-                          },
-                          icon: const Icon(Icons.remove_circle),
+                      )
+                    : ListView.builder(
+                        itemCount: optionsList.length,
+                        itemBuilder: (ctx, index) => ListTile(
+                          leading: Text('選項 ${index + 1}.'),
+                          title: Text(
+                            optionsList[index],
+                            textAlign: TextAlign.center,
+                          ),
+                          trailing: IconButton(
+                            onPressed: () {
+                              optionsList.removeAt(index);
+                            },
+                            icon: const Icon(Icons.remove_circle),
+                          ),
                         ),
                       ),
-                    ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

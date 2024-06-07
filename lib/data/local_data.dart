@@ -41,19 +41,19 @@ class LocalData {
           localData.toList().map((localData) => localData.toJson()).toList());
       bool result = await prefs.setString(_key, jsonData);
       if (result) {
-        print("數據保存本地成功");
+        print("數據保存本地成功");//Test
       } else {
-        print("數據保存本地失败");
+        print("數據保存本地失败");//Test
       }
     } catch (e) {
       print('數據保存失败: $e');
     }
   }
 
-  //刪除本地資料
+  //刪除本地資料，尚無使用
   Future<void> deletedLocalData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove('放_key');
+    await prefs.remove('key');//括弧中放key
   }
 
   void addLocalData(String item, List<String> options) {
@@ -64,10 +64,10 @@ class LocalData {
   void updateLocalData(int index, dynamic item, RxList<dynamic> options) {
     localData[index] = (HelpDecide(item: item, option: options));
     saveToLocal();
-  } //轉輪頁修改項目/選項 
+  } //轉輪頁編輯項目/選項 
 
   void removeLocalDataIndex(int index) {
     localData.removeAt(index);
-    // saveToLocal();
-  } //only for test
+    saveToLocal();
+  } //刪除抽獎項目
 }
