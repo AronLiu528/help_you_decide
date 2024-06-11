@@ -27,7 +27,7 @@ class WheelPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Get.dialog(EditOption(), arguments: index);
+              Get.dialog(EditOption(), arguments: index, useSafeArea: true);
             },
             icon: const Icon(Icons.settings),
           ),

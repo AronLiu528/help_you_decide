@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:help_you_decide/data/local_data.dart';
-// import 'package:help_you_decide/getx/home_controller.dart';
 import 'package:help_you_decide/pages/wheel_page.dart';
 import 'package:help_you_decide/widgets/add_decision_sheet.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
-
-  // final HomeController homeController = Get.put(HomeController());
 
   final LocalData localData = Get.find<LocalData>();
 
@@ -67,9 +64,19 @@ class HomePage extends StatelessWidget {
             child: Obx(
               () => localData.localData.isEmpty
                   ? const Center(
-                      child: Text(
-                        '目前沒有項目\n \n新增個項目吧!!',
-                        style: TextStyle(fontSize: 20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Oh oh...目前沒有項目!',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          SizedBox(height: 50),
+                          Text(
+                            '新增個項目吧!',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ],
                       ),
                     )
                   : GridView.builder(
@@ -105,101 +112,3 @@ class HomePage extends StatelessWidget {
   }
 }
 
-// final Map<String, List<String>> itemsWithOptions = {};
-
-  // void addItemWithOption() {
-  //   print('1 $itemsWithOptions');
-  //   final String item = itemController.text.trim();
-  //   print('item = $item');
-  //   final String option = optionController.text.trim();
-  //   print('option = $option');
-  //   if (item.isNotEmpty && option.isNotEmpty) {
-  //     if (!itemsWithOptions.containsKey(item)) {
-  //       itemsWithOptions[item] = [];
-  //     }
-  //     itemsWithOptions[item]!.add(option);
-  //     optionController.clear(); // Clear option input for next input
-  //     itemController.clear();
-  //     print('2 $itemsWithOptions');
-  //   }
-  // }
-
-  // void _showDialog() {
-  //   Get.dialog(
-  //     Dialog(
-  //       shape: RoundedRectangleBorder(
-  //         borderRadius: BorderRadius.circular(20),
-  //       ), // 邊角形状
-  //       child: Container(
-  //         width: Get.width,
-  //         height: Get.height,
-  //         color: Colors.white,
-  //         child: Column(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             TextField(
-  //               controller: itemController,
-  //               decoration: InputDecoration(labelText: 'Enter item'),
-  //             ),
-  //             TextField(
-  //               controller: optionController,
-  //               decoration: InputDecoration(labelText: 'Enter option'),
-  //             ),
-  //             Expanded(
-  //                 child: ListView.builder(
-  //                     itemCount: decidedItem[0].option.length,
-  //                     itemBuilder: (context, index) {
-  //                       return ListTile(
-  //                           title: TextField(
-  //                               controller: TextEditingController(
-  //                                   text: decidedItem[index].option[index]),
-  //                               onSubmitted: (newText) {
-  //                                 decidedItem[index].option[index] = newText;
-  //                               }));
-  //                     })),
-  //             ElevatedButton(
-  //               onPressed: () {
-  //                 controller.addOption(optionController.text);
-  //                 // addItemWithOption();
-  //                 //optionController.clear();
-  //               },
-  //               child: Text('保存選項'),
-  //             ),
-  //             const SizedBox(
-  //               height: 20,
-  //             )
-  //           ],
-  //         ),
-  //       ),
-  //       // actions: <Widget>[
-  //       //   ElevatedButton(
-  //       //     child: Text("保存"),
-  //       //     onPressed: () {
-  //       //       Get.back(); // 使用 Get.back() 来关闭对话框
-  //       //     },
-  //       //   ),
-  //       // ],
-  //     ),
-  //     barrierDismissible: true, // 点击对话框外部时关闭对话框
-  //   );
-  // }
-
-   // children: [
-                    //  for (final item in decisionController.decisions)
-                    //   Container(
-                    //     padding: const EdgeInsets.all(5),
-                    //     child: ElevatedButton(
-                    //       onPressed: (){
-                    //         editDecision(decisionController.decisions);
-                    //       },
-                    //       // () {
-                    //       //   Get.to(() => const DecisionPage(),
-                    //       //       arguments: item);
-                    //       // },
-                    //       child: Text(
-                    //         item.item,
-                    //         style: const TextStyle(fontSize: 20),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ],

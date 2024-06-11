@@ -20,7 +20,7 @@ class AddDecisionSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        height: Get.height * 0.8,
+        height: Get.height * 0.7,
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
