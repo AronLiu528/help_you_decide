@@ -18,7 +18,7 @@ A Side Project <br>
 # [聯絡]
 
 希望這個指南對您有幫助！如果有任何其他問題，請隨時告訴我。<br>
-姓名：劉營檡/Aron
-聯絡電話:0972981308
-E-Mail:aron.liu0528@gmail.com
-
+姓名：劉營檡/Aron <br>
+聯絡電話:0972981308 <br>
+E-Mail:aron.liu0528@gmail.com <br>
+ 
