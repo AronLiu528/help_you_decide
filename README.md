@@ -1,4 +1,7 @@
-# help_you_decide
- a side project
+# help_you_decide - Side Project
 
-提供一個隨機抽獎，解決日常上無法決定的小問題！
+· Flutter/Dart 
+· GetX 狀態管理
+· shared_preferences套件實現本地儲存
+
+提供一個隨機抽獎，可自行添加抽獎項目與抽獎選項，解決日常上難以決定的小問題！
