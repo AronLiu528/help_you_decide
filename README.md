@@ -1,6 +1,6 @@
 # help_you_decide - Side Project
 
-1.Flutter/Dart
+1.Flutter/Dart \n
 2.GetX 狀態管理
 3.shared_preferences套件實現本地儲存
 
