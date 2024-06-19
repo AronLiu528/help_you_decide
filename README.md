@@ -1,6 +1,6 @@
 # help_you_decide - Side Project
 
-· Flutter/Dart 
+· Flutter/Dart
 · GetX 狀態管理
 · shared_preferences套件實現本地儲存
 
